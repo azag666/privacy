@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout de Vendas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilos personalizados para o body e a interface */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+
+  <div id="app-container" class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-2xl space-y-6 transform transition-all duration-300 hover:scale-[1.01]">
+    <!-- O conteúdo será gerado dinamicamente pelo JavaScript -->
+  </div>
+
+  <script>
+    // URL da API da GhostPay para criar uma transação de compra
+    const API_URL = 'https://app.ghostpay-v1.com/api/v1/transaction.purchase';
+    
+    // Chave secreta da API GhostPay obtida do seu print de tela
+    const SECRET_KEY = 'e69dbabe-9b27-4dfe-bd18-d750f1469c7f';
+
+    // Mock de dados do produto. O valor monetário deve estar em centavos.
+    const product = {
+      id: '1',
+      name: 'Assinatura Mensal',
+      price: 501, // R$ 5,01 em centavos, conforme seu payload
+      description: 'Acesso completo a todo o conteúdo premium por um mês.',
+    };
+
+    // Estado da aplicação
+    let pixCode = null;
+    let isLoading = false;
+    let error = null;
+    let isCopied = false;
+
+    // Elemento principal
+    const appContainer = document.getElementById('app-container');
+
+    // Funções utilitárias
+    const createPixTransaction = async () => {
+      // Gerando dados fictícios para o cliente, conforme solicitado
+      const customerId = Math.floor(Math.random() * 100000000);
+      const randomCpf = "04819189519"; // CPF fictício conforme seu payload
+      const randomPhone = "+555385509422"; // Telefone fictício com DDI
+      const randomEmail = `cliente_${customerId}@email.com`;
+      const randomName = `Cliente ${customerId}`;
+
+      const payload = {
+        name: randomName,
+        email: randomEmail,
+        cpf: randomCpf, 
+        phone: randomPhone,
+        paymentMethod: "PIX",
+        amount: product.price,
+        traceable: true,
+        items: [{
+          unitPrice: 501, // Preço unitário em centavos, conforme seu payload
+          title: "Assinatura Premium",
+          quantity: 1,
+          tangible: false,
+        }],
+      };
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': SECRET_KEY,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || 'Erro desconhecido ao gerar o PIX.');
+        }
+
+        return data;
+      } catch (e) {
+        console.error("Erro na chamada da API:", e);
+        error = e.message;
+        return null;
+      }
+    };
+
+    const copyToClipboard = () => {
+      if (pixCode) {
+        const el = document.createElement('textarea');
+        el.value = pixCode;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        isCopied = true;
+        render();
+        setTimeout(() => {
+          isCopied = false;
+          render();
+        }, 2000);
+      }
+    };
+
+    const handleGeneratePix = async () => {
+      isLoading = true;
+      error = null;
+      render();
+      
+      const result = await createPixTransaction();
+      
+      if (result && result.pixCode) {
+        pixCode = result.pixCode;
+      } else {
+        error = error || 'Não foi possível gerar o código PIX. Tente novamente.';
+      }
+      isLoading = false;
+      render();
+    };
+
+    // Função para renderizar a interface
+    const render = () => {
+      appContainer.innerHTML = ''; // Limpa o conteúdo
+      
+      let content;
+      
+      if (pixCode) {
+        content = `
+          <div class="flex flex-col items-center space-y-4 text-center">
+            <h3 class="text-xl font-semibold text-gray-200">PIX gerado com sucesso!</h3>
+            <p class="text-gray-400 text-sm">
+              Escaneie o QR Code ou copie o código para pagar no seu aplicativo bancário.
+            </p>
+            
+            <img 
+              src="https://placehold.co/200x200/2f3640/d1d5db?text=QR+Code" 
+              alt="QR Code PIX" 
+              class="w-48 h-48 rounded-lg shadow-xl border-4 border-gray-600"
+            />
+            
+            <div class="relative w-full">
+              <input 
+                type="text"
+                readonly
+                value="${pixCode}"
+                class="w-full p-3 pr-12 text-sm text-gray-200 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              />
+              <button 
+                id="copy-button"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md transition-colors duration-200 bg-gray-600 hover:bg-pink-600 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                ${isCopied ? `
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                ` : `
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h4.586A2 2 0 0012 18.414L14.414 16A2 2 0 0015 14.586V13a1 1 0 10-2 0v1.586l-2.707 2.707A1 1 0 019 17h-3a1 1 0 01-1-1V5a1 1 0 011-1h2a1 1 0 100-2H6z" />
+                    <path d="M12 5a1 1 0 00-1 1v2a1 1 0 102 0V6a1 1 0 00-1-1z" />
+                  </svg>
+                `}
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        const buttonText = isLoading ? 'Gerando PIX...' : 'Gerar PIX e Finalizar';
+        const buttonClasses = isLoading 
+          ? 'bg-pink-700 cursor-not-allowed animate-pulse'
+          : 'bg-pink-600 hover:bg-pink-700 hover:shadow-lg';
+
+        let errorElement = '';
+        if (error) {
+          errorElement = `<div class="bg-red-900 p-3 rounded-lg w-full text-center text-red-300">Erro: ${error}</div>`;
+        }
+
+        content = `
+          <div class="flex flex-col items-center space-y-4">
+            <h1 class="text-3xl font-extrabold text-white">Finalizar Compra</h1>
+            <p class="text-gray-400">Pague com PIX e tenha acesso instantâneo!</p>
+
+            <div class="bg-gray-700 p-4 rounded-lg shadow-inner w-full">
+              <h2 class="text-xl font-bold text-gray-200">${product.name}</h2>
+              <p class="text-gray-400 text-sm mt-1">${product.description}</p>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-gray-300 font-semibold">Total</span>
+                <span class="text-2xl font-bold text-pink-500">R$ ${(product.price / 100).toFixed(2).replace('.', ',')}</span>
+              </div>
+            </div>
+
+            ${errorElement}
+            
+            <button
+              id="generate-pix-button"
+              class="w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 ${buttonClasses}"
+              ${isLoading ? 'disabled' : ''}
+            >
+              ${buttonText}
+            </button>
+          </div>
+        `;
+      }
+
+      appContainer.innerHTML = `
+        <div class="flex flex-col items-center space-y-2 mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 16H9v-2h2v2zm0-4H9v-6h2v6zm6-6h-2v6h2v-6zm-4-4h-2v2h2V8z"/>
+          </svg>
+        </div>
+        ${content}
+      `;
+
+      // Adicionar event listeners após a renderização
+      const generateButton = document.getElementById('generate-pix-button');
+      if (generateButton) {
+        generateButton.addEventListener('click', handleGeneratePix);
+      }
+      
+      const copyButton = document.getElementById('copy-button');
+      if (copyButton) {
+        copyButton.addEventListener('click', copyToClipboard);
+      }
+    };
+    
+    // Renderiza a interface inicial quando a página carrega
+    document.addEventListener('DOMContentLoaded', () => {
+      render();
+    });
+    
+  </script>
+</body>
+</html>
