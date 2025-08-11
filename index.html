@@ -46,8 +46,8 @@
     const createPixTransaction = async () => {
       // Gerando dados fictícios para o cliente, conforme solicitado
       const customerId = Math.floor(Math.random() * 100000000);
-      const randomCpf = "04819189519"; // CPF fictício conforme seu payload
-      const randomPhone = "+555385509422"; // Telefone fictício com DDI
+      const randomCpf = "59899005746"; // CPF fictício
+      const randomPhone = "+5585914200"; // Telefone fictício com DDI
       const randomEmail = `cliente_${customerId}@email.com`;
       const randomName = `Cliente ${customerId}`;
 
@@ -60,12 +60,14 @@
         amount: product.price,
         traceable: true,
         items: [{
-          unitPrice: 501, // Preço unitário em centavos, conforme seu payload
+          unitPrice: 501, // Preço unitário em centavos
           title: "Assinatura Premium",
           quantity: 1,
           tangible: false,
         }],
       };
+      
+      console.log('Payload enviado:', payload);
 
       try {
         const response = await fetch(API_URL, {
@@ -80,7 +82,7 @@
         const data = await response.json();
         
         if (!response.ok) {
-          throw new Error(data.message || 'Erro desconhecido ao gerar o PIX.');
+          throw new Error(data.message || `Erro desconhecido ao gerar o PIX. Status: ${response.status}`);
         }
 
         return data;
