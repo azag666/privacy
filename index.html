@@ -72,7 +72,7 @@
 
         .gif-gallery img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
             border-radius: 12px;
             border: 2px solid var(--card-color);
@@ -81,6 +81,12 @@
         .gif-gallery img:hover {
             transform: scale(1.05);
         }
+        
+        .main-preview {
+            grid-column: 1 / -1; /* Span all columns */
+            height: auto; /* Adjust height for a non-square image */
+        }
+
 
         /* --- Urgency Bar --- */
         .urgency-bar {
@@ -263,6 +269,7 @@
             <h1>Acesso <span>Proibido</span> Finalmente Liberado</h1>
             <p>Todo meu conteúdo mais íntimo e sem censura em um só lugar. Acesso vitalício por tempo limitado.</p>
             <div class="gif-gallery">
+                <img src="https://i.postimg.cc/4x6KKxFh/Captura-de-Tela-2025-08-13-a-s-15-57-26.png" alt="Prévia do conteúdo principal" class="main-preview">
                 <img src="https://i.postimg.cc/Dm3ZZQ2b/Design-sem-nome-1.gif" alt="Prévia do conteúdo 1">
                 <img src="https://i.postimg.cc/pLFbW9rK/Design-sem-nome.gif" alt="Prévia do conteúdo 2">
             </div>
