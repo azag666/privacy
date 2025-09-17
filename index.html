@@ -42,8 +42,36 @@
         .header h1 { font-size: 1.25rem; font-weight: 600; margin: 0; }
         .main-content { padding: 1.5rem 2rem; }
 
+        /* Estilos da seção de Perfil */
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-white);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+        }
+        .profile-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
         /* Estilos da seção de input */
-        #donation-section { animation: fadeIn 0.5s ease; }
+        #donation-section { animation: fadeIn 0.5s ease; margin-top: 2rem; }
         .input-wrapper {
             background-color: var(--input-bg);
             border-radius: 0.75rem;
@@ -58,10 +86,7 @@
             text-align: left;
             margin-bottom: 0.25rem;
         }
-        .input-group {
-            display: flex;
-            align-items: center;
-        }
+        .input-group { display: flex; align-items: center; }
         .currency-symbol {
             font-size: 1.75rem;
             font-weight: 600;
@@ -69,103 +94,170 @@
             margin-right: 0.75rem;
         }
         #donation-input-usd {
-            border: none;
-            background: transparent;
-            width: 100%;
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            outline: none;
-            padding: 0;
+            border: none; background: transparent; width: 100%;
+            font-size: 2.25rem; font-weight: 700;
+            color: var(--text-primary); outline: none; padding: 0;
         }
         #donation-input-usd::placeholder { color: #d1d5db; }
-        /* Remove setas do input number */
         input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-          -webkit-appearance: none; 
-          margin: 0; 
-        }
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
         .conversion-display {
-            color: var(--text-secondary);
+            color: var(--text-secondary); 
             font-weight: 500;
-            height: 24px;
+            min-height: 48px;
             margin-bottom: 1.5rem;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+            font-size: 0.9rem;
         }
-        .conversion-display span { color: var(--text-primary); }
+        .conversion-display span { 
+            color: var(--text-primary); 
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+            margin-top: 4px;
+        }
 
         .btn {
-            background-color: var(--accent);
-            color: #fff;
-            border: none;
-            padding: 0.875rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all .2s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1);
+            background-color: var(--accent); color: #fff; border: none;
+            padding: 0.875rem 1rem; border-radius: 0.5rem;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all .2s; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.5rem; box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1);
         }
         .btn:hover:not(:disabled) {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
+            background-color: var(--accent-dark); transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
         }
         .btn:disabled {
-            background-color: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+            background-color: #9ca3af; cursor: not-allowed;
+            transform: none; box-shadow: none;
         }
-        .btn-green { background-color: var(--success); }
-
-        /* Estilos da seção PIX (reutilizados e aprimorados) */
+        
+        /* Estilos da seção PIX */
         .pix-section { display: none; margin-top: 1.5rem; animation: fadeIn 0.5s ease; }
-        .timer { background-color: #fefce8; color: #a16207; font-weight: 500; padding: .5rem 1rem; border-radius: 99px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem; }
-        #qr-code-img { border: 1px solid var(--border-color); border-radius: 0.5rem; max-width: 100%; width: 256px; height: 256px; margin: 0 auto; display: block; }
-        .pix-code-wrapper { background-color: var(--bg-light); padding: 0.75rem 1rem; border-radius: 0.5rem; margin-top: 1rem; word-break: break-all; text-align: left; font-size: 0.8rem; line-height: 1.4; position: relative; border: 1px solid var(--border-color); }
-        .copy-button { position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%); background: var(--bg-white); border: 1px solid var(--border-color); padding: 0.375rem 0.625rem; border-radius: 0.375rem; cursor: pointer; font-size: 0.75rem; font-weight: 500; transition: all 0.2s; }
-        .copy-button:hover { background-color: #f3f4f6; }
-        #copy-feedback { color: var(--success); font-weight: 500; margin-top: .5rem; height: 18px; font-size: 0.875rem; }
-        .instructions { margin-top: 1.5rem; text-align: left; font-size: 0.9rem; }
+        .timer { background-color: #fefce8; color: #a16207; font-weight: 500; padding: .5rem 1rem; border-radius: 99px; display: inline-block; margin-bottom: 1.5rem; font-size: 0.875rem; }
+        
+        .info-header {
+            background-color: #eef2ff;
+            color: #4338ca;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid #c7d2fe;
+            line-height: 1.5;
+        }
+        .info-header p { margin: 0.25rem 0; }
+        
+        .waiting-payment {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e5e7eb;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        .waiting-payment p {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .pix-code-wrapper {
+            background-color: var(--bg-light); padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            word-break: break-all; text-align: left; font-size: 0.8rem;
+            line-height: 1.4; border: 1px solid var(--border-color);
+        }
+        
+        .btn-copy {
+            margin-top: 0.75rem;
+            background-color: #e5e7eb;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .btn-copy:hover:not(:disabled) {
+            background-color: #d1d5db;
+            transform: translateY(-2px);
+        }
+        
+        #copy-feedback {
+            color: var(--success); font-weight: 500; margin-top: .5rem;
+            height: 18px; font-size: 0.875rem;
+        }
+        .instructions { margin-top: 2rem; text-align: left; font-size: 0.9rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
         .step { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; }
-        .step-number { background-color: var(--accent); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
-        .footer { padding: 1.25rem; color: var(--text-secondary); font-size: .8rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border-color); background-color: var(--bg-light); }
+        .step-number {
+            background-color: var(--accent); color: white; border-radius: 50%;
+            width: 24px; height: 24px; display: flex; justify-content: center;
+            align-items: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0;
+        }
+        .footer {
+            padding: 1.25rem; color: var(--text-secondary); font-size: .8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; align-items: center; gap: 0.75rem;
+            border-top: 1px solid var(--border-color); background-color: var(--bg-light);
+        }
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .footer-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-item a:hover {
+            color: var(--text-primary);
+        }
+
+        .loader {
+            width: 20px; height: 20px; border: 2px solid #fff;
+            border-bottom-color: transparent; border-radius: 50%;
+            display: inline-block; box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
         .hidden { display: none; }
-        .loader { width: 20px; height: 20px; border: 2px solid #fff; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
         @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; translateY(0); } }
     </style>
-     <script>
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'SEU_PIXEL_ID'); // <-- COLOQUE SEU PIXEL ID AQUI
-        fbq('track', 'PageView');
-    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Finalize sua Doação</h1>
+            <h1>Converter Doação para PIX</h1>
         </div>
         <div class="main-content">
             
+            <div class="profile-section">
+                <img src="https://i.postimg.cc/9F0W3rM5/Captura-de-Tela-2025-09-17-a-s-19-37-36.png" alt="Foto de Carolyne" class="profile-pic">
+                <h2 class="profile-name">Ajude a Carolyne</h2>
+                <p class="profile-description">A sua doação é enviada de forma segura e transparente. Muito obrigada pelo seu apoio!</p>
+            </div>
+
             <div id="donation-section">
                 <div class="input-wrapper">
                     <label class="input-label" for="donation-input-usd">Valor da doação (USD)</label>
                     <div class="input-group">
                         <span class="currency-symbol">U$</span>
-                        <input type="number" id="donation-input-usd" placeholder="25.00" min="1" step="0.01">
+                        <input type="number" id="donation-input-usd" placeholder="25.00" min="0.01" step="0.01">
                     </div>
                 </div>
                 <div class="conversion-display" id="conversion-display">
-                    Carregando cotação...
+                    <!-- Mensagem inicial será inserida via JS -->
                 </div>
                 <button id="generate-pix-btn" class="btn" disabled>
                     Gerar PIX para Pagar
@@ -174,56 +266,72 @@
 
             <div id="pix-section" class="pix-section">
                 <div class="timer">Seu código expira em: <span id="countdown">10:00</span></div>
-                <img id="qr-code-img" src="" alt="PIX QR Code" class="hidden">
-                <div class="pix-code-wrapper">
-                    <p id="pix-code-text" style="padding-right: 70px;"></p>
-                    <button id="copy-btn" class="copy-button">Copiar</button>
+                
+                <div class="info-header">
+                    <p>Você está doando o valor em Real para <strong>Carolyne</strong>.</p>
+                    <p>Ela receberá o valor final em <strong>Euro</strong>.</p>
                 </div>
+
+                <div id="waiting-payment-animation" class="waiting-payment hidden">
+                    <div class="spinner"></div>
+                    <p>Aguardando pagamento...</p>
+                </div>
+
+                <p>Copie o código PIX para pagar:</p>
+                <div class="pix-code-wrapper">
+                    <p id="pix-code-text"></p>
+                </div>
+                <button id="copy-btn" class="btn btn-copy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 0.5rem;">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3z"/>
+                    </svg>
+                    Copiar Código PIX
+                </button>
                 <div id="copy-feedback"></div>
+
                 <div class="instructions">
-                    <div class="step">
+                     <div class="step">
                         <div class="step-number">1</div>
-                        <p>Copie o código PIX acima ou escaneie o QR Code.</p>
+                        <p>Copie o código acima e abra o app do seu banco.</p>
                     </div>
-                    <div class="step">
+                     <div class="step">
                         <div class="step-number">2</div>
-                        <p>Abra o app do seu banco e pague com a opção "PIX Copia e Cola".</p>
+                        <p>Escolha a opção "PIX Copia e Cola" e confirme o pagamento.</p>
                     </div>
-                    <div class="step">
+                     <div class="step">
                         <div class="step-number">3</div>
                         <p>Após o pagamento, sua doação será confirmada automaticamente.</p>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
         <div class="footer">
-            <svg class="w-4 h-4" style="width: 1rem; height: 1rem;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
-            Ambiente 100% Seguro
+            <div class="footer-item">
+                <svg style="width: 1rem; height: 1rem;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
+                <span>Ambiente 100% Seguro</span>
+            </div>
+            <div class="footer-item">
+                <span>Dúvidas? <a href="https://wa.me/351926383263" target="_blank">Fale com a Carolyne (+351 926 383 263)</a></span>
+            </div>
         </div>
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- CONFIGURAÇÃO ---
-        // Substitua os valores abaixo pelos seus dados.
+        // --- CONFIGURAÇÃO DA API E CHECKOUT ---
         const CONFIG = {
             API_BASE_URL: 'https://novaapi-one.vercel.app',
-            SELLER_API_KEY: 'a0b2f4ce-2011-4faf-9e77-52e59bbcb02b', // <-- SUA CHAVE DE VENDEDOR
-            CHECKOUT_ID: 11, // <-- ID DO SEU CHECKOUT
-            REDIRECT_URL: 'https://t.me/+bgFpfwqLlYg3N2Qx', // <-- SUA URL DE REDIRECIONAMENTO PÓS-PAGAMENTO
-            POLLING_INTERVAL: 4000,
-            TIMER_DURATION_MINUTES: 10,
-            MINIMUM_USD_DONATION: 1, // Valor mínimo de doação em USD
-            EXCHANGE_RATE_API: 'https://economia.awesomeapi.com.br/last/USD-BRL'
+            SELLER_API_KEY: 'a0b2f4ce-2011-4faf-9e77-52e59bbcb02b', // Sua chave de Vendedor da API
+            CHECKOUT_ID: 11, // ID do seu checkout
+            REDIRECT_URL: 'https://t.me/+bgFpfwqLlYg3N2Qx', // URL para onde o usuário será redirecionado
+            POLLING_INTERVAL: 4000, // Tempo em milissegundos para verificar o status do pagamento
+            TIMER_DURATION_MINUTES: 10, // Duração do PIX em minutos
         };
-
-        let clickId = null,
-            transactionId = null,
-            pixCode = '',
-            statusCheckInterval,
-            timerInterval,
-            usdToBrlRate = 0,
-            valueInCents = 0;
+        
+        // --- PARÂMETROS DA PLATAFORMA (Valores Fixos) ---
+        const PLATFORM_FEE_USD = 5.00; // Taxa fixa da plataforma em Dólar
+        const USD_TO_BRL_RATE = 5.50;  // Cotação fixa do Dólar
 
         const DOMElements = {
             donationSection: document.getElementById('donation-section'),
@@ -231,56 +339,54 @@
             usdInput: document.getElementById('donation-input-usd'),
             conversionDisplay: document.getElementById('conversion-display'),
             generatePixBtn: document.getElementById('generate-pix-btn'),
-            qrCodeImg: document.getElementById('qr-code-img'),
+            waitingPayment: document.getElementById('waiting-payment-animation'),
+            countdown: document.getElementById('countdown'),
             pixCodeText: document.getElementById('pix-code-text'),
             copyBtn: document.getElementById('copy-btn'),
             copyFeedback: document.getElementById('copy-feedback'),
-            countdown: document.getElementById('countdown'),
         };
 
-        function displayError(message) {
+        let valueInCents = 0;
+        let pixCode = '';
+        let clickId = null;
+        let transactionId = null;
+        let statusCheckInterval, timerInterval;
+
+        const displayError = (message) => {
             console.error(message);
-            DOMElements.conversionDisplay.innerHTML = `<span style="color: #dc3545;">${message}</span>`;
+            DOMElements.conversionDisplay.innerHTML = `<span style="color: #dc3545;">Erro: ${message}</span>`;
             DOMElements.generatePixBtn.disabled = true;
-        }
-
-        async function fetchExchangeRate() {
-            try {
-                const response = await fetch(CONFIG.EXCHANGE_RATE_API);
-                if (!response.ok) throw new Error('Cotação indisponível.');
-                const data = await response.json();
-                usdToBrlRate = parseFloat(data.USDBRL.bid);
-                DOMElements.conversionDisplay.textContent = `Cotação: U$1,00 = R$ ${usdToBrlRate.toFixed(2).replace('.', ',')}`;
-            } catch (error) {
-                displayError('Erro ao buscar cotação.');
-                console.error(error);
-            }
-        }
-
-        function updateBRLValue() {
+        };
+        
+        const updateBRLValue = () => {
             const usdValue = parseFloat(DOMElements.usdInput.value);
-            if (isNaN(usdValue) || usdValue < CONFIG.MINIMUM_USD_DONATION) {
-                DOMElements.conversionDisplay.innerHTML = `Valor mínimo: U$ ${CONFIG.MINIMUM_USD_DONATION.toFixed(2)}`;
+            
+            if (isNaN(usdValue) || usdValue <= 0) {
+                DOMElements.conversionDisplay.innerHTML = `Cotação: U$1 = R$${USD_TO_BRL_RATE.toFixed(2)}. Taxa de U$${PLATFORM_FEE_USD.toFixed(2)} incluída.`;
                 DOMElements.generatePixBtn.disabled = true;
                 valueInCents = 0;
                 return;
             }
 
-            if (usdToBrlRate > 0) {
-                const brlValue = usdValue * usdToBrlRate;
-                valueInCents = Math.round(brlValue * 100);
-                DOMElements.conversionDisplay.innerHTML = `Total em Reais: <span>R$ ${brlValue.toFixed(2).replace('.', ',')}</span>`;
-                DOMElements.generatePixBtn.disabled = false;
-            }
-        }
+            const totalUsd = usdValue + PLATFORM_FEE_USD;
+            const valueInBRL = totalUsd * USD_TO_BRL_RATE;
+            valueInCents = Math.round(valueInBRL * 100);
+
+            DOMElements.conversionDisplay.innerHTML = 
+                `Doação: U$ ${usdValue.toFixed(2)} + Taxa: U$ ${PLATFORM_FEE_USD.toFixed(2)}` +
+                `<span>Total a pagar: R$ ${valueInBRL.toFixed(2).replace('.', ',')}</span>`;
+            
+            DOMElements.generatePixBtn.disabled = false;
+        };
         
-        function startTimer() {
+        const startTimer = () => {
             let time = CONFIG.TIMER_DURATION_MINUTES * 60;
             timerInterval = setInterval(() => {
                 if (time <= 0) {
                     clearInterval(timerInterval);
                     clearInterval(statusCheckInterval);
                     DOMElements.countdown.textContent = 'Expirado';
+                    DOMElements.waitingPayment.innerHTML = '<p style="color: #dc3545;">Pagamento Expirado</p>';
                     return;
                 }
                 time--;
@@ -288,52 +394,34 @@
                 const seconds = (time % 60).toString().padStart(2, '0');
                 DOMElements.countdown.textContent = `${minutes}:${seconds}`;
             }, 1000);
-        }
+        };
 
-        async function copyPixCode() {
-            try {
-                await navigator.clipboard.writeText(pixCode);
-                DOMElements.copyFeedback.textContent = 'Código PIX copiado!';
-                setTimeout(() => DOMElements.copyFeedback.textContent = '', 2000);
-            } catch (err) {
-                DOMElements.copyFeedback.textContent = 'Falha ao copiar';
-                console.error(err);
-            }
-        }
-
-        async function checkPaymentStatus() {
+        const checkPaymentStatus = async () => {
             if (!transactionId) return;
             try {
                 const response = await fetch(`${CONFIG.API_BASE_URL}/api/pix/status/${transactionId}`, {
                     headers: { 'x-api-key': CONFIG.SELLER_API_KEY }
                 });
-                if (!response.ok) return;
+                if (!response.ok) return; // Continua tentando se a API falhar
                 const data = await response.json();
                 if (data.status === 'paid' || data.status === 'COMPLETED') {
                     clearInterval(statusCheckInterval);
                     clearInterval(timerInterval);
-                    window.location.href = CONFIG.REDIRECT_URL;
+                    DOMElements.waitingPayment.innerHTML = '<p style="color: var(--success);">Pagamento Aprovado!</p>';
+                    setTimeout(() => window.location.href = CONFIG.REDIRECT_URL, 1500);
                 }
             } catch (error) {
                 console.error('Erro ao verificar status:', error);
             }
-        }
+        };
 
-        async function handleGeneratePix() {
-            if (valueInCents <= 0) {
-                displayError('Valor inválido para gerar PIX.');
-                return;
-            }
+        const handleGeneratePix = async () => {
+            if (valueInCents <= 0) return;
             const btn = DOMElements.generatePixBtn;
             btn.disabled = true;
             btn.innerHTML = '<span class="loader"></span> Gerando PIX...';
 
             try {
-                fbq('track', 'InitiateCheckout', {
-                    value: (valueInCents / 100 / usdToBrlRate).toFixed(2),
-                    currency: 'USD'
-                });
-
                 const response = await fetch(`${CONFIG.API_BASE_URL}/api/pix/generate`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'x-api-key': CONFIG.SELLER_API_KEY },
@@ -342,49 +430,74 @@
                 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.message || 'Erro do servidor');
+                    throw new Error(errorData.message || 'Falha na comunicação com o servidor');
                 }
                 
                 const data = await response.json();
                 pixCode = data.qr_code_text;
                 transactionId = data.transaction_id;
 
-                DOMElements.qrCodeImg.src = data.qr_code_base64;
                 DOMElements.pixCodeText.textContent = pixCode;
-
                 DOMElements.donationSection.style.display = 'none';
                 DOMElements.pixSection.style.display = 'block';
-                DOMElements.qrCodeImg.classList.remove('hidden');
+                DOMElements.waitingPayment.classList.remove('hidden');
                 
                 startTimer();
                 statusCheckInterval = setInterval(checkPaymentStatus, CONFIG.POLLING_INTERVAL);
 
             } catch (error) {
-                displayError(error.message || 'Não foi possível gerar o PIX.');
+                displayError(error.message);
                 btn.innerHTML = 'Tentar Novamente';
                 btn.disabled = false;
             }
-        }
+        };
 
-        async function initializeCheckout() {
+        const copyPixCode = () => {
+            const textArea = document.createElement("textarea");
+            textArea.value = pixCode;
+            
+            // Estilo para deixar o elemento invisível
+            textArea.style.position = "fixed";
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            textArea.style.width = "2em";
+            textArea.style.height = "2em";
+            textArea.style.padding = 0;
+            textArea.style.border = "none";
+            textArea.style.outline = "none";
+            textArea.style.boxShadow = "none";
+            textArea.style.background = "transparent";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
             try {
-                await fetchExchangeRate();
-                if (usdToBrlRate === 0) return; // Interrompe se não conseguiu a cotação
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    DOMElements.copyFeedback.textContent = 'Código PIX copiado!';
+                } else {
+                    DOMElements.copyFeedback.textContent = 'Falha ao copiar';
+                }
+            } catch (err) {
+                DOMElements.copyFeedback.textContent = 'Falha ao copiar';
+                console.error('Fallback de cópia falhou', err);
+            }
 
+            document.body.removeChild(textArea);
+            setTimeout(() => DOMElements.copyFeedback.textContent = '', 2000);
+        };
+        
+        const initializePage = async () => {
+            DOMElements.conversionDisplay.innerHTML = `Cotação: U$1 = R$${USD_TO_BRL_RATE.toFixed(2)}. Taxa de U$${PLATFORM_FEE_USD.toFixed(2)} incluída.`;
+            
+            try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const bodyPayload = {
-                    sellerApiKey: CONFIG.SELLER_API_KEY,
-                    checkoutId: CONFIG.CHECKOUT_ID,
-                    referer: document.referrer,
-                    user_agent: navigator.userAgent,
-                    fbclid: urlParams.get('fbclid'),
+                    sellerApiKey: CONFIG.SELLER_API_KEY, checkoutId: CONFIG.CHECKOUT_ID, referer: document.referrer,
+                    user_agent: navigator.userAgent, fbclid: urlParams.get('fbclid'),
                     fbp: document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1],
-                    fbc: document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1],
-                    utm_source: urlParams.get('utm_source'),
-                    utm_campaign: urlParams.get('utm_campaign'),
-                    utm_medium: urlParams.get('utm_medium'),
-                    utm_content: url_params.get('utm_content'),
-                    utm_term: urlParams.get('utm_term')
+                    fbc: document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1]
                 };
                 Object.keys(bodyPayload).forEach(key => (bodyPayload[key] === null || bodyPayload[key] === undefined) && delete bodyPayload[key]);
                 
@@ -394,21 +507,23 @@
                     body: JSON.stringify(bodyPayload)
                 });
                 
-                if (!clickResponse.ok) throw new Error('Falha ao rastrear o acesso.');
+                if (!clickResponse.ok) console.warn('Não foi possível registrar o clique de acesso.');
+                
                 const clickData = await clickResponse.json();
                 clickId = clickData.click_id;
 
-                DOMElements.usdInput.addEventListener('input', updateBRLValue);
-                DOMElements.generatePixBtn.addEventListener('click', handleGeneratePix);
-                DOMElements.copyBtn.addEventListener('click', copyPixCode);
-
             } catch (error) {
-                displayError(error.message);
+                console.warn('Falha ao registrar clique:', error.message);
             }
-        }
+
+            DOMElements.usdInput.addEventListener('input', updateBRLValue);
+            DOMElements.generatePixBtn.addEventListener('click', handleGeneratePix);
+            DOMElements.copyBtn.addEventListener('click', copyPixCode);
+        };
         
-        initializeCheckout();
+        initializePage();
     });
     </script>
 </body>
 </html>
+
