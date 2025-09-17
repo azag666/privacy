@@ -3,388 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso Exclusivo Liberado</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Doação Segura via PIX</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
-            --bg-color: #0d0d0d;
-            --card-color: #1a1a1a;
-            --primary-color: #ff007f; /* Rosa Neon */
-            --primary-glow: rgba(255, 0, 127, 0.5);
-            --text-color: #f0f0f0;
-            --text-muted: #888;
-            --success-color: #00ff9d;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --accent: #007bff; /* Tom de azul moderno */
+            --accent-dark: #0056b3;
+            --success: #28a745;
+            --border-color: #e5e7eb;
+            --input-bg: #f3f4f6;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: var(--text-primary);
         }
-
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* --- Header & Hero --- */
-        .hero {
-            padding: 30px 0;
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            line-height: 1.3;
-            color: var(--text-color);
-            text-shadow: 0 0 15px var(--primary-glow);
-            margin-bottom: 10px;
-        }
-        
-        .hero h1 span {
-            color: var(--primary-color);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        .gif-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .gif-gallery img {
+            background-color: var(--bg-white);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,.05), 0 4px 6px -4px rgba(0,0,0,.05);
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid var(--card-color);
-            transition: transform 0.3s ease;
-        }
-        .gif-gallery img:hover {
-            transform: scale(1.05);
-        }
-        
-        .main-preview {
-            grid-column: 1 / -1; /* Span all columns */
-            height: auto; /* Adjust height for a non-square image */
-        }
-
-
-        /* --- Urgency Bar --- */
-        .urgency-bar {
-            background: linear-gradient(90deg, var(--primary-color), #a30052);
-            padding: 12px;
-            margin: 20px -15px; /* Extends to screen edges */
-        }
-        .urgency-bar p {
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-        #countdown {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        /* --- Content List --- */
-        .content-section {
-            background-color: var(--card-color);
-            border-radius: 16px;
-            padding: 25px;
-            margin: 40px 0;
-            border: 1px solid #2a2a2a;
-        }
-        .content-section h2 {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-        }
-        .content-list {
-            list-style: none;
-            text-align: left;
-        }
-        .content-list li {
-            display: flex;
-            align-items: center;
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-        }
-        .content-list li svg {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            flex-shrink: 0;
-            color: var(--success-color);
-        }
-
-        /* --- Packages --- */
-        .packages-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        .package {
-            background-color: var(--card-color);
-            border: 2px solid #333;
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
+            max-width: 440px;
+            text-align: center;
+            border: 1px solid var(--border-color);
             overflow: hidden;
         }
-        .package.best-value {
-            border-color: var(--primary-color);
-            transform: scale(1.03);
-            box-shadow: 0 0 25px var(--primary-glow);
-        }
-        .best-value-badge {
-            position: absolute;
-            top: 15px;
-            right: -40px;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            padding: 5px 40px;
-            font-weight: 700;
-            transform: rotate(45deg);
-            font-size: 0.9rem;
-        }
-        .package h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .package-details {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-color);
-            margin-bottom: 20px;
-        }
-        .price span {
-            font-size: 1.5rem;
-            font-weight: 400;
-        }
-        .buy-button {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, var(--primary-color), #a30052);
-            color: var(--text-color);
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
-        }
-        .buy-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+        .header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .header h1 { font-size: 1.25rem; font-weight: 600; margin: 0; }
+        .main-content { padding: 1.5rem 2rem; }
 
-        /* --- Trust Badges --- */
-        .trust-badges {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin: 50px 0;
-            text-align: center;
+        /* Estilos da seção de input */
+        #donation-section { animation: fadeIn 0.5s ease; }
+        .input-wrapper {
+            background-color: var(--input-bg);
+            border-radius: 0.75rem;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
         }
-        .badge {
+        .input-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-align: left;
+            margin-bottom: 0.25rem;
+        }
+        .input-group {
             display: flex;
-            flex-direction: column;
             align-items: center;
         }
-        .badge .icon {
-            width: 50px;
-            height: 50px;
-            background-color: #222;
-            border-radius: 50%;
+        .currency-symbol {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-right: 0.75rem;
+        }
+        #donation-input-usd {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            outline: none;
+            padding: 0;
+        }
+        #donation-input-usd::placeholder { color: #d1d5db; }
+        /* Remove setas do input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] { -moz-appearance: textfield; }
+
+        .conversion-display {
+            color: var(--text-secondary);
+            font-weight: 500;
+            height: 24px;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s ease;
+        }
+        .conversion-display span { color: var(--text-primary); }
+
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.875rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+            gap: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1);
         }
-        .badge .icon svg {
-            width: 28px;
-            height: 28px;
+        .btn:hover:not(:disabled) {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
         }
-        .badge p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: 600;
+        .btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
+        .btn-green { background-color: var(--success); }
 
-        /* --- Footer --- */
-        .footer {
-            padding: 30px 0;
-            border-top: 1px solid #2a2a2a;
-            margin-top: 30px;
-        }
-        .footer p {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-bottom: 15px;
-        }
-        .payment-icons img {
-            height: 25px;
-            margin: 0 5px;
-            opacity: 0.7;
-        }
+        /* Estilos da seção PIX (reutilizados e aprimorados) */
+        .pix-section { display: none; margin-top: 1.5rem; animation: fadeIn 0.5s ease; }
+        .timer { background-color: #fefce8; color: #a16207; font-weight: 500; padding: .5rem 1rem; border-radius: 99px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem; }
+        #qr-code-img { border: 1px solid var(--border-color); border-radius: 0.5rem; max-width: 100%; width: 256px; height: 256px; margin: 0 auto; display: block; }
+        .pix-code-wrapper { background-color: var(--bg-light); padding: 0.75rem 1rem; border-radius: 0.5rem; margin-top: 1rem; word-break: break-all; text-align: left; font-size: 0.8rem; line-height: 1.4; position: relative; border: 1px solid var(--border-color); }
+        .copy-button { position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%); background: var(--bg-white); border: 1px solid var(--border-color); padding: 0.375rem 0.625rem; border-radius: 0.375rem; cursor: pointer; font-size: 0.75rem; font-weight: 500; transition: all 0.2s; }
+        .copy-button:hover { background-color: #f3f4f6; }
+        #copy-feedback { color: var(--success); font-weight: 500; margin-top: .5rem; height: 18px; font-size: 0.875rem; }
+        .instructions { margin-top: 1.5rem; text-align: left; font-size: 0.9rem; }
+        .step { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .step-number { background-color: var(--accent); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
+        .footer { padding: 1.25rem; color: var(--text-secondary); font-size: .8rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border-color); background-color: var(--bg-light); }
+        .hidden { display: none; }
+        .loader { width: 20px; height: 20px; border: 2px solid #fff; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+     <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'SEU_PIXEL_ID'); // <-- COLOQUE SEU PIXEL ID AQUI
+        fbq('track', 'PageView');
+    </script>
 </head>
 <body>
-
     <div class="container">
-        <header class="hero">
-            <h1>Acesso <span>Proibido</span> Finalmente Liberado</h1>
-            <p>Todo meu conteúdo mais íntimo e sem censura em um só lugar. Acesso vitalício por tempo limitado.</p>
-            <div class="gif-gallery">
-                <img src="https://i.postimg.cc/4x6KKxFh/Captura-de-Tela-2025-08-13-a-s-15-57-26.png" alt="Prévia do conteúdo principal" class="main-preview">
-                <img src="https://i.postimg.cc/Dm3ZZQ2b/Design-sem-nome-1.gif" alt="Prévia do conteúdo 1">
-                <img src="https://i.postimg.cc/pLFbW9rK/Design-sem-nome.gif" alt="Prévia do conteúdo 2">
-            </div>
-        </header>
-
-        <div class="urgency-bar">
-            <p>Oferta Exclusiva Termina Em:</p>
-            <div id="countdown">00:09:59</div>
+        <div class="header">
+            <h1>Finalize sua Doação</h1>
         </div>
+        <div class="main-content">
+            
+            <div id="donation-section">
+                <div class="input-wrapper">
+                    <label class="input-label" for="donation-input-usd">Valor da doação (USD)</label>
+                    <div class="input-group">
+                        <span class="currency-symbol">U$</span>
+                        <input type="number" id="donation-input-usd" placeholder="25.00" min="1" step="0.01">
+                    </div>
+                </div>
+                <div class="conversion-display" id="conversion-display">
+                    Carregando cotação...
+                </div>
+                <button id="generate-pix-btn" class="btn" disabled>
+                    Gerar PIX para Pagar
+                </button>
+            </div>
 
-        <div class="content-section">
-            <h2>Você vai me ver como <span>ninguém nunca viu...</span></h2>
-            <ul class="content-list">
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    Vários vídeos me masturbando até gozar sem parar.
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    Vídeos fodendo bem gostoso em todas as posições imagináveis.
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    Vídeos explícitos dando o cuzinho como você sempre quis.
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    E muito mais surpresas que vão te deixar louco...
-                </li>
-            </ul>
+            <div id="pix-section" class="pix-section">
+                <div class="timer">Seu código expira em: <span id="countdown">10:00</span></div>
+                <img id="qr-code-img" src="" alt="PIX QR Code" class="hidden">
+                <div class="pix-code-wrapper">
+                    <p id="pix-code-text" style="padding-right: 70px;"></p>
+                    <button id="copy-btn" class="copy-button">Copiar</button>
+                </div>
+                <div id="copy-feedback"></div>
+                <div class="instructions">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <p>Copie o código PIX acima ou escaneie o QR Code.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <p>Abra o app do seu banco e pague com a opção "PIX Copia e Cola".</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <p>Após o pagamento, sua doação será confirmada automaticamente.</p>
+                    </div>
+                </div>
+                </div>
         </div>
-        
-        <h2>🔥 ESCOLHA SEU ACESSO VIP 🔥</h2>
-        <p style="color: var(--text-muted); margin-bottom: 30px;">Pague uma vez e tenha acesso para sempre. Sem mensalidades.</p>
-        
-        <div class="packages-container">
-            <!-- Pacote PRATA -->
-            <div class="package">
-                <h3>PRATA</h3>
-                <p class="package-details"><strong>15 VÍDEOS</strong> + <strong>25 FOTOS</strong></p>
-                <p class="price"><span>R$</span>19<span style="font-size: 1.5rem;">,99</span></p>
-                <a href="https://checkout.appcnpay.com/checkout/cme97vmmh00dx11t6d126j8ig?offer=3QVKJLK" class="buy-button">Liberar Agora</a>
-            </div>
-
-            <!-- Pacote OURO (MAIS VENDIDO) -->
-            <div class="package best-value">
-                <div class="best-value-badge">Mais Vendido</div>
-                <h3>OURO</h3>
-                <p class="package-details"><strong>30 VÍDEOS</strong> + <strong>50 FOTOS</strong></p>
-                <p class="price"><span>R$</span>29<span style="font-size: 1.5rem;">,99</span></p>
-                <a href="https://checkout.appcnpay.com/checkout/cme97vmmh00dx11t6d126j8ig?offer=5GV4WE2" class="buy-button">Quero o Melhor Pacote</a>
-            </div>
-
-            <!-- Pacote BRONZE -->
-            <div class="package">
-                <h3>BRONZE</h3>
-                <p class="package-details"><strong>5 VÍDEOS</strong> + <strong>10 FOTOS</strong></p>
-                <p class="price"><span>R$</span>15<span style="font-size: 1.5rem;">,99</span></p>
-                <a href="https://checkout.appcnpay.com/checkout/cme97vmmh00dx11t6d126j8ig?offer=JQEBVD8" class="buy-button">Liberar Agora</a>
-            </div>
+        <div class="footer">
+            <svg class="w-4 h-4" style="width: 1rem; height: 1rem;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
+            Ambiente 100% Seguro
         </div>
-
-        <div class="trust-badges">
-            <div class="badge">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg></div>
-                <p>Compra 100% Segura</p>
-            </div>
-            <div class="badge">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0h.75A.75.75 0 015.25 6v.75m0 0v.75a.75.75 0 01-.75.75h-.75m0 0H3.75m0 0h-.75A.75.75 0 012.25 6v-.75m0 0V4.5A.75.75 0 013 3.75h.75M6.75 21v-9a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v9m9-18v9a2.25 2.25 0 01-2.25 2.25h-1.5a2.25 2.25 0 01-2.25-2.25v-9m9 0h1.5a2.25 2.25 0 012.25 2.25v9m-9-18V3.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0118 3.75v9.75m-9 6.75h1.5a2.25 2.25 0 002.25-2.25v-9.75a2.25 2.25 0 00-2.25-2.25h-1.5a2.25 2.25 0 00-2.25 2.25v9.75a2.25 2.25 0 002.25 2.25z" /></svg></div>
-                <p>Cobrança Discreta</p>
-            </div>
-            <div class="badge">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg></div>
-                <p>Acesso Imediato</p>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <p>O acesso é enviado para o seu e-mail logo após a confirmação do pagamento. O nome na fatura do cartão será "APP*Serviços Online" para garantir sua privacidade.</p>
-            <div class="payment-icons">
-                <img src="https://i.postimg.cc/L8gL20Xf/pix.png" alt="Pix">
-                <img src="https://i.postimg.cc/WpM4QWv4/mastercard.png" alt="Mastercard">
-                <img src="https://i.postimg.cc/PqYp5g7g/visa.png" alt="Visa">
-            </div>
-            <p style="margin-top: 20px;">Copyright © 2024 - Todos os direitos reservados.</p>
-        </footer>
     </div>
 
     <script>
-        function startCountdown(duration, display) {
-            let timer = duration, minutes, seconds;
-            const interval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURAÇÃO ---
+        // Substitua os valores abaixo pelos seus dados.
+        const CONFIG = {
+            API_BASE_URL: 'https://novaapi-one.vercel.app',
+            SELLER_API_KEY: 'a0b2f4ce-2011-4faf-9e77-52e59bbcb02b', // <-- SUA CHAVE DE VENDEDOR
+            CHECKOUT_ID: 11, // <-- ID DO SEU CHECKOUT
+            REDIRECT_URL: 'https://t.me/+bgFpfwqLlYg3N2Qx', // <-- SUA URL DE REDIRECIONAMENTO PÓS-PAGAMENTO
+            POLLING_INTERVAL: 4000,
+            TIMER_DURATION_MINUTES: 10,
+            MINIMUM_USD_DONATION: 1, // Valor mínimo de doação em USD
+            EXCHANGE_RATE_API: 'https://economia.awesomeapi.com.br/last/USD-BRL'
+        };
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+        let clickId = null,
+            transactionId = null,
+            pixCode = '',
+            statusCheckInterval,
+            timerInterval,
+            usdToBrlRate = 0,
+            valueInCents = 0;
 
-                display.textContent = "00:" + minutes + ":" + seconds;
+        const DOMElements = {
+            donationSection: document.getElementById('donation-section'),
+            pixSection: document.getElementById('pix-section'),
+            usdInput: document.getElementById('donation-input-usd'),
+            conversionDisplay: document.getElementById('conversion-display'),
+            generatePixBtn: document.getElementById('generate-pix-btn'),
+            qrCodeImg: document.getElementById('qr-code-img'),
+            pixCodeText: document.getElementById('pix-code-text'),
+            copyBtn: document.getElementById('copy-btn'),
+            copyFeedback: document.getElementById('copy-feedback'),
+            countdown: document.getElementById('countdown'),
+        };
 
-                if (--timer < 0) {
-                    // O que acontece quando o tempo acaba
-                    // clearInterval(interval); // Para o contador
-                    // document.querySelector('.urgency-bar').style.display = 'none';
-                    timer = duration; // Reinicia para manter a urgência
+        function displayError(message) {
+            console.error(message);
+            DOMElements.conversionDisplay.innerHTML = `<span style="color: #dc3545;">${message}</span>`;
+            DOMElements.generatePixBtn.disabled = true;
+        }
+
+        async function fetchExchangeRate() {
+            try {
+                const response = await fetch(CONFIG.EXCHANGE_RATE_API);
+                if (!response.ok) throw new Error('Cotação indisponível.');
+                const data = await response.json();
+                usdToBrlRate = parseFloat(data.USDBRL.bid);
+                DOMElements.conversionDisplay.textContent = `Cotação: U$1,00 = R$ ${usdToBrlRate.toFixed(2).replace('.', ',')}`;
+            } catch (error) {
+                displayError('Erro ao buscar cotação.');
+                console.error(error);
+            }
+        }
+
+        function updateBRLValue() {
+            const usdValue = parseFloat(DOMElements.usdInput.value);
+            if (isNaN(usdValue) || usdValue < CONFIG.MINIMUM_USD_DONATION) {
+                DOMElements.conversionDisplay.innerHTML = `Valor mínimo: U$ ${CONFIG.MINIMUM_USD_DONATION.toFixed(2)}`;
+                DOMElements.generatePixBtn.disabled = true;
+                valueInCents = 0;
+                return;
+            }
+
+            if (usdToBrlRate > 0) {
+                const brlValue = usdValue * usdToBrlRate;
+                valueInCents = Math.round(brlValue * 100);
+                DOMElements.conversionDisplay.innerHTML = `Total em Reais: <span>R$ ${brlValue.toFixed(2).replace('.', ',')}</span>`;
+                DOMElements.generatePixBtn.disabled = false;
+            }
+        }
+        
+        function startTimer() {
+            let time = CONFIG.TIMER_DURATION_MINUTES * 60;
+            timerInterval = setInterval(() => {
+                if (time <= 0) {
+                    clearInterval(timerInterval);
+                    clearInterval(statusCheckInterval);
+                    DOMElements.countdown.textContent = 'Expirado';
+                    return;
                 }
+                time--;
+                const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+                const seconds = (time % 60).toString().padStart(2, '0');
+                DOMElements.countdown.textContent = `${minutes}:${seconds}`;
             }, 1000);
         }
 
-        window.onload = function () {
-            const tenMinutes = 9 * 60 + 59,
-                display = document.querySelector('#countdown');
-            startCountdown(tenMinutes, display);
-        };
-    </script>
+        async function copyPixCode() {
+            try {
+                await navigator.clipboard.writeText(pixCode);
+                DOMElements.copyFeedback.textContent = 'Código PIX copiado!';
+                setTimeout(() => DOMElements.copyFeedback.textContent = '', 2000);
+            } catch (err) {
+                DOMElements.copyFeedback.textContent = 'Falha ao copiar';
+                console.error(err);
+            }
+        }
 
+        async function checkPaymentStatus() {
+            if (!transactionId) return;
+            try {
+                const response = await fetch(`${CONFIG.API_BASE_URL}/api/pix/status/${transactionId}`, {
+                    headers: { 'x-api-key': CONFIG.SELLER_API_KEY }
+                });
+                if (!response.ok) return;
+                const data = await response.json();
+                if (data.status === 'paid' || data.status === 'COMPLETED') {
+                    clearInterval(statusCheckInterval);
+                    clearInterval(timerInterval);
+                    window.location.href = CONFIG.REDIRECT_URL;
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+            }
+        }
+
+        async function handleGeneratePix() {
+            if (valueInCents <= 0) {
+                displayError('Valor inválido para gerar PIX.');
+                return;
+            }
+            const btn = DOMElements.generatePixBtn;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loader"></span> Gerando PIX...';
+
+            try {
+                fbq('track', 'InitiateCheckout', {
+                    value: (valueInCents / 100 / usdToBrlRate).toFixed(2),
+                    currency: 'USD'
+                });
+
+                const response = await fetch(`${CONFIG.API_BASE_URL}/api/pix/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-api-key': CONFIG.SELLER_API_KEY },
+                    body: JSON.stringify({ value_cents: valueInCents, click_id: clickId })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro do servidor');
+                }
+                
+                const data = await response.json();
+                pixCode = data.qr_code_text;
+                transactionId = data.transaction_id;
+
+                DOMElements.qrCodeImg.src = data.qr_code_base64;
+                DOMElements.pixCodeText.textContent = pixCode;
+
+                DOMElements.donationSection.style.display = 'none';
+                DOMElements.pixSection.style.display = 'block';
+                DOMElements.qrCodeImg.classList.remove('hidden');
+                
+                startTimer();
+                statusCheckInterval = setInterval(checkPaymentStatus, CONFIG.POLLING_INTERVAL);
+
+            } catch (error) {
+                displayError(error.message || 'Não foi possível gerar o PIX.');
+                btn.innerHTML = 'Tentar Novamente';
+                btn.disabled = false;
+            }
+        }
+
+        async function initializeCheckout() {
+            try {
+                await fetchExchangeRate();
+                if (usdToBrlRate === 0) return; // Interrompe se não conseguiu a cotação
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const bodyPayload = {
+                    sellerApiKey: CONFIG.SELLER_API_KEY,
+                    checkoutId: CONFIG.CHECKOUT_ID,
+                    referer: document.referrer,
+                    user_agent: navigator.userAgent,
+                    fbclid: urlParams.get('fbclid'),
+                    fbp: document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1],
+                    fbc: document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1],
+                    utm_source: urlParams.get('utm_source'),
+                    utm_campaign: urlParams.get('utm_campaign'),
+                    utm_medium: urlParams.get('utm_medium'),
+                    utm_content: url_params.get('utm_content'),
+                    utm_term: urlParams.get('utm_term')
+                };
+                Object.keys(bodyPayload).forEach(key => (bodyPayload[key] === null || bodyPayload[key] === undefined) && delete bodyPayload[key]);
+                
+                const clickResponse = await fetch(`${CONFIG.API_BASE_URL}/api/registerClick`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bodyPayload)
+                });
+                
+                if (!clickResponse.ok) throw new Error('Falha ao rastrear o acesso.');
+                const clickData = await clickResponse.json();
+                clickId = clickData.click_id;
+
+                DOMElements.usdInput.addEventListener('input', updateBRLValue);
+                DOMElements.generatePixBtn.addEventListener('click', handleGeneratePix);
+                DOMElements.copyBtn.addEventListener('click', copyPixCode);
+
+            } catch (error) {
+                displayError(error.message);
+            }
+        }
+        
+        initializeCheckout();
+    });
+    </script>
 </body>
 </html>
